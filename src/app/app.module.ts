@@ -9,7 +9,6 @@ import { CreatePostComponent } from './code/components/create-post/create-post.c
 import { PostComponent } from './code/components/post/post.component';
 import { LoginComponent } from './code/components/login/login.component';
 import { RegisterComponent } from './code/components/register/register.component';
-import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
