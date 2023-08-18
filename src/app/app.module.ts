@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
-import { CreatePostComponent } from './create-post/create-post.component';
-import { PostComponent } from './post/post.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { AppRoutingModule } from './code/routing/app-routing.module';
+import { AppComponent } from './code/components/app.component';
+import { HeaderComponent } from './code/components/header/header.component';
+import { HomeComponent } from './code/components/home/home.component';
+import { CreatePostComponent } from './code/components/create-post/create-post.component';
+import { PostComponent } from './code/components/post/post.component';
+import { LoginComponent } from './code/components/login/login.component';
+import { RegisterComponent } from './code/components/register/register.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { RegisterComponent } from './register/register.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
