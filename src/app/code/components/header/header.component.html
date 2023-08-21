@@ -1,1 +1,7 @@
-<p>header works!</p>
+<nav>
+  <a *ngIf="isLoggedIn" routerLink="/">Home</a>
+  <a *ngIf="isLoggedIn" routerLink="/create">Create Post</a>
+  <a *ngIf="!isLoggedIn" routerLink="/login">Login</a>
+  <a *ngIf="!isLoggedIn" routerLink="/register">Register</a>
+  <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+</nav>

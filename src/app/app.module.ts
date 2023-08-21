@@ -11,10 +11,12 @@ import { LoginComponent } from './code/components/login/login.component';
 import { RegisterComponent } from './code/components/register/register.component';
 import { environment } from '../environments/environment';
 import { getAnalytics } from 'firebase/analytics';
+import { getAuth } from "firebase/auth";
 import * as firebase from 'firebase/app';
 
-const app = firebase.initializeApp(environment.firebase);
-const analytics = getAnalytics(app);
+export const app = firebase.initializeApp(environment.firebase);
+export const analytics = getAnalytics(app);
+export const auth = getAuth(app);
 
 @NgModule({
   declarations: [

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -7,23 +7,17 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  isLoggedIn = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
-
-  ngOnInit(): void {
+  constructor(private authService: AuthService) {
+    const auth = getAuth();
+    onAuthStateChanged(auth, user => {
+      this.isLoggedIn = !!user;
+    });
   }
 
   logout() {
-    this.authService.logout()
-      .then(() => {
-        // Redirect to the login page or show a success message
-        this.router.navigate(['/login']);
-      })
-      .catch(error => {
-        // Handle any errors
-        console.error(error);
-      });
+    this.authService.signOut();
   }
-
 }

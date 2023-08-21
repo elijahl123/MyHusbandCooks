@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -7,19 +7,16 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+  constructor(private authService: AuthService) {
+  }
 
-  email: string = '';
-  password: string = '';
-
-  constructor(private authService: AuthService) { }
-
-  register() {
-    this.authService.register(this.email, this.password)
+  register(email: string, password: string) {
+    this.authService.signUp(email, password)
       .then(() => {
-        // Redirect to home or show success message
+        // Redirect to home or other page
       })
       .catch(error => {
-        // Handle error
+        console.log(error.message);
       });
   }
 }
