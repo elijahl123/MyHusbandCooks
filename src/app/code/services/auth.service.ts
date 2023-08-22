@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, deleteUser } from 'firebase/auth';
+import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import { app, db } from '../../app.module';
 
 @Injectable({
@@ -47,5 +47,14 @@ export class AuthService {
       return userDoc.data();
     }
     return null;
+  }
+
+  async deleteUser() {
+    const user = getAuth(app).currentUser;
+    if (user) {
+      const userRef = doc(db, 'users', user.uid);
+      await deleteUser(user);
+      await deleteDoc(userRef);
+    }
   }
 }
