@@ -13,10 +13,15 @@ import { environment } from '../environments/environment';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth } from "firebase/auth";
 import * as firebase from 'firebase/app';
+import { ReactiveFormsModule } from '@angular/forms';
+import { getFirestore } from 'firebase/firestore';
+import { AccountComponent } from './code/components/account/account.component';
+import { AuthGuard } from './code/guards/auth-guard.guard';
 
 export const app = firebase.initializeApp(environment.firebase);
 export const analytics = getAnalytics(app);
 export const auth = getAuth(app);
+export const db = getFirestore(app)
 
 @NgModule({
   declarations: [
@@ -26,13 +31,16 @@ export const auth = getAuth(app);
     CreatePostComponent,
     PostComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,15 @@
+<h1>My Account</h1>
+<form [formGroup]="accountForm">
+  <label for="firstName">First Name:</label>
+  <input type="text" id="firstName" formControlName="firstName">
+
+  <label for="lastName">Last Name:</label>
+  <input type="text" id="lastName" formControlName="lastName">
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" formControlName="email" readonly>
+
+  <!-- Other fields... -->
+
+  <button (click)="saveChanges()">Save Changes</button>
+</form>
