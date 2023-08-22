@@ -10,16 +10,6 @@ export class PostService {
 
   constructor() { }
 
-  private static toPost(doc: any): Post {
-    return {
-      id: doc.id,
-      title: doc.data().title,
-      content: doc.data().content,
-      authorId: doc.data().authorId,
-      authorName: doc.data().authorName // If you have this field
-    };
-  }
-
 
   async createPost(post: Post) {
     const postsRef = collection(db, 'posts');
@@ -40,8 +30,8 @@ export class PostService {
   }
 
   async updatePost(post: Post) {
-    const postRef = doc(db, 'posts', post.id);
-    await updateDoc(postRef, post);
+    const postRef = doc(db, 'posts', post.id!);
+    await updateDoc(postRef, post as Partial<Post>);
   }
 
   async deletePost(id: string) {
