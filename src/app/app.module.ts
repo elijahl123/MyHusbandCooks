@@ -17,6 +17,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { getFirestore } from 'firebase/firestore';
 import { AccountComponent } from './code/components/account/account.component';
 import { AuthGuard } from './code/guards/auth-guard.guard';
+import { PostListComponent } from './code/components/post-list/post-list.component';
+import { QuillConfigModule, QuillEditorComponent } from 'ngx-quill';
+import { CommonModule } from '@angular/common';
+import { CommentComponent } from './code/components/comment/comment.component';
 
 export const app = firebase.initializeApp(environment.firebase);
 export const analytics = getAnalytics(app);
@@ -32,12 +36,30 @@ export const db = getFirestore(app)
     PostComponent,
     LoginComponent,
     RegisterComponent,
-    AccountComponent
+    AccountComponent,
+    PostListComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
     ReactiveFormsModule,
+    QuillConfigModule.forRoot({
+      modules: {
+        syntax: false,
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['blockquote', 'code-block'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+          [{ color: [] }, { background: [] }],
+          ['link'],
+          ['clean'],
+        ]
+      }
+    }),
+    QuillEditorComponent,
   ],
   providers: [
     AuthGuard

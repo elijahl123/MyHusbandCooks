@@ -1,1 +1,11 @@
-<p>create-post works!</p>
+<h1>{{ postId ? 'Edit Post' : 'Create Post' }}</h1>
+<form [formGroup]="postForm">
+  <label for="title">Title:</label>
+  <input type="text" id="title" formControlName="title" required>
+
+  <!-- Rich text editor for content (you can use a package like ngx-quill) -->
+  <label for="content">Content:</label>
+  <quill-editor formControlName="content" id="content"></quill-editor>
+
+  <button (click)="savePost()">{{ postId ? 'Update' : 'Create' }}</button>
+</form>

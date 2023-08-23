@@ -1,0 +1,7 @@
+<div *ngFor="let post of posts">
+  <h2>{{ post.title }}</h2>
+  <div [innerHTML]="post.content"></div> <!-- Display rich text content -->
+  <p>Author ID: {{ post.authorId }}</p>
+  <a [routerLink]="['/post', post.id]">Read More</a>
+  <!-- Add options to filter, sort, or search posts -->
+</div>

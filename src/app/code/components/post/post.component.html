@@ -1,1 +1,6 @@
-<p>post works!</p>
+<div *ngIf="post">
+  <h1>{{ post.title }}</h1>
+  <div [innerHTML]="post.content"></div> <!-- Display rich text content -->
+  <p>Author ID: {{ post.authorId }}</p>
+  <!-- Add options to edit or delete post for authenticated users or superusers -->
+</div>

@@ -1,0 +1,8 @@
+<div *ngFor="let comment of comments">
+  <p>{{ comment.authorId }}: {{ comment.content }}</p>
+  <!-- Add options to edit or delete comment for authenticated users or superusers -->
+</div>
+<form [formGroup]="commentForm">
+  <input type="text" formControlName="content" required>
+  <button (click)="addComment()">Add Comment</button>
+</form>

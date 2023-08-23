@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, getDoc } from 'firebase/firestore';
-import { db } from '../../app.module';
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, getDoc, Timestamp } from 'firebase/firestore';
+import { app, db } from '../../app.module';
 import { Post } from '../interfaces/post.model';
+import { Comment } from '../interfaces/comment.model';
+import { getAuth } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,10 @@ export class PostService {
 
 
   async createPost(post: Post) {
+    const user = getAuth(app).currentUser;
+    if (user) {
+      post.authorId = user.uid; // Set the author ID from the current user
+    }
     const postsRef = collection(db, 'posts');
     const postRef = await addDoc(postsRef, post);
     return postRef.id; // Return the new post's ID
@@ -37,5 +43,30 @@ export class PostService {
   async deletePost(id: string) {
     const postRef = doc(db, 'posts', id);
     await deleteDoc(postRef);
+  }
+
+  // Comment Methods
+
+  async createComment(postId: string, comment: Comment) {
+    const commentsRef = collection(db, 'posts', postId, 'comments');
+    comment.timestamp = Timestamp.fromDate(new Date());
+    const commentRef = await addDoc(commentsRef, comment);
+    return commentRef.id; // Return the new comment's ID
+  }
+
+  async getComments(postId: string): Promise<Comment[]> {
+    const commentsRef = collection(db, 'posts', postId, 'comments');
+    const commentSnapshot = await getDocs(commentsRef);
+    return commentSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Comment));
+  }
+
+  async updateComment(postId: string, comment: Comment) {
+    const commentRef = doc(db, 'posts', postId, 'comments', comment.id!);
+    await updateDoc(commentRef, comment as Partial<Comment>);
+  }
+
+  async deleteComment(postId: string, commentId: string) {
+    const commentRef = doc(db, 'posts', postId, 'comments', commentId);
+    await deleteDoc(commentRef);
   }
 }
