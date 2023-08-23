@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { PostService } from './post.service';
+import { Timestamp } from 'firebase/firestore';
 
 describe('PostService', () => {
   let service: PostService;
@@ -54,6 +55,56 @@ describe('PostService', () => {
       authorId: 'Updated Author ID'
     };
     await service.updatePost(post);
+    // Additional assertions based on your Firestore setup
+  });
+
+  // Test for createComment method
+  it('should create a comment', async () => {
+    const posts = await service.getPosts();
+    const postId = posts[0].id!;
+    const comment = {
+      content: 'Test Content',
+      authorId: 'Test Author ID',
+      timestamp: Timestamp.fromDate(new Date())
+    };
+    const commentId = await service.createComment(postId, comment);
+    expect(commentId).toBeDefined();
+    // Additional assertions based on your Firestore setup
+  });
+
+  // Test for getComments method
+  it('should retrieve comments for a post', async () => {
+    const posts = await service.getPosts();
+    const postId = posts[0].id!;
+    const comments = await service.getComments(postId);
+    expect(comments).toBeDefined();
+    // Additional assertions based on your Firestore setup
+    console.log(comments);
+  });
+
+  // Test for updateComment method
+  it('should update a comment', async () => {
+    const posts = await service.getPosts();
+    const postId = posts[0].id!;
+    const comments = await service.getComments(postId);
+    const commentId = comments[0].id!;
+    const comment = {
+      id: commentId,
+      content: 'Updated Content',
+      authorId: 'Updated Author ID',
+      timestamp: Timestamp.fromDate(new Date())
+    };
+    await service.updateComment(postId, comment);
+    // Additional assertions based on your Firestore setup
+  });
+
+  // Test for deleteComment method
+  it('should delete a comment', async () => {
+    const posts = await service.getPosts();
+    const postId = posts[0].id!;
+    const comments = await service.getComments(postId);
+    const commentId = comments[0].id!;
+    await service.deleteComment(postId, commentId);
     // Additional assertions based on your Firestore setup
   });
 
