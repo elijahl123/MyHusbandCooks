@@ -1,7 +1,22 @@
-<nav>
-  <a routerLink="/">Home</a>
-  <a *ngIf="isLoggedIn" routerLink="/create">Create Post</a>
-  <a *ngIf="!isLoggedIn" routerLink="/login">Login</a>
-  <a *ngIf="!isLoggedIn" routerLink="/register">Register</a>
-  <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
-</nav>
+<div class="w-full px-20 py-5 bg-mhc-dark justify-between items-start gap-2.5 inline-flex">
+  <a routerLink="/" class="btn btn-background">
+    <div class="text-center text-lg font-semibold">Home</div>
+  </a>
+  <div class="justify-start items-start gap-7 flex">
+    <a *ngIf="isSuperuser" routerLink="/create" class="btn btn-background">
+      <div class="text-center text-lg font-semibold">Create Post</div>
+    </a>
+    <a *ngIf="!isLoggedIn" routerLink="/login" class="btn btn-background">
+      <div class="text-center text-lg font-semibold">Login</div>
+    </a>
+    <a *ngIf="!isLoggedIn" routerLink="/register" class="btn btn-dark">
+      <div class="text-center text-lg font-semibold">Register</div>
+    </a>
+    <a *ngIf="isLoggedIn" routerLink="/account" class="btn btn-background">
+      <div class="text-center text-lg font-semibold">Account</div>
+    </a>
+    <button *ngIf="isLoggedIn" (click)="logout()" class="btn btn-dark">
+      <span class="text-center text-lg font-semibold">Logout</span>
+    </button>
+  </div>
+</div>

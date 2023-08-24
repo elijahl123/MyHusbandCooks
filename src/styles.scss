@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600&display=swap');
+
+@layer base {
+  body {
+    @apply bg-mhc-background text-mhc-dark font-sans;
+  }
+
+  .btn {
+    @apply px-4 py-2 duration-200 transition-all grid gap-2 grid-flow-col auto-cols-max items-center justify-center
+  }
+
+  .btn-lg {
+    @apply px-5 py-3 text-xl rounded-xl;
+  }
+
+  .btn-background {
+    @apply bg-mhc-background border-mhc-background rounded-lg hover:bg-mhc-background-hover
+    hover:border-mhc-background-hover text-mhc-dark border-2
+  }
+
+  .btn-dark {
+    @apply bg-mhc-dark border-mhc-background rounded-lg hover:bg-mhc-background text-mhc-background
+    hover:text-mhc-dark border-2
+  }
+}
