@@ -28,7 +28,7 @@ export class AuthService {
       });
       // Redirect to home or other page
     } catch (error: any) {
-      console.error(error.message);
+      throw error;
     }
   }
 
@@ -48,6 +48,18 @@ export class AuthService {
     }
     return null;
   }
+
+  // Get a user by their ID
+  async getUserById(userId: string) {
+    const userDocRef = doc(db, 'users', userId);
+    const userDoc = await getDoc(userDocRef);
+    if (userDoc.exists()) {
+      return userDoc.data();
+    } else {
+      throw new Error('User not found');
+    }
+  }
+
 
   async deleteUser() {
     const user = getAuth(app).currentUser;

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { app } from '../../../app.module';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ export class HeaderComponent {
   isSuperuser = false;
 
   constructor(private authService: AuthService, private router: Router) {
-    const auth = getAuth();
+    const auth = getAuth(app);
     onAuthStateChanged(auth, async user => {
       this.isLoggedIn = !!user;
       if (user) {

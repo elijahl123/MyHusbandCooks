@@ -4,13 +4,71 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600&display=swap');
 
+#splash-screen {
+  transition: opacity 1s ease-in-out;
+  opacity: 1;
+}
+
+#splash-screen.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
 @layer base {
   body {
-    @apply bg-mhc-background text-mhc-dark font-sans;
+    @apply bg-mhc-background text-mhc-dark font-sans overflow-auto flex flex-col;
+  }
+
+  .app {
+    @apply flex flex-col flex-grow overflow-auto max-h-screen;
+  }
+
+  app-home {
+    @apply app;
+  }
+
+  app-post {
+    @apply app;
+  }
+
+  app-login {
+    @apply app;
+  }
+
+  app-register {
+    @apply app;
+  }
+
+  app-account {
+    @apply app;
+  }
+
+  app-create-post {
+    @apply app;
+  }
+
+  ::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+
+    @apply transition-all duration-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+
+    @apply transition-all duration-100 bg-mhc-dark;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 8px;
+
+    @apply transition-all duration-100;
   }
 
   .btn {
-    @apply px-4 py-2 duration-200 transition-all grid gap-2 grid-flow-col auto-cols-max items-center justify-center
+    @apply px-4 py-2 duration-200 transition-all grid gap-2 grid-flow-col auto-cols-max items-center justify-center cursor-pointer;
   }
 
   .btn-lg {
@@ -25,5 +83,20 @@
   .btn-dark {
     @apply bg-mhc-dark border-mhc-background rounded-lg hover:bg-mhc-background text-mhc-background
     hover:text-mhc-dark border-2
+  }
+
+  .btn-dark-filled {
+    @apply bg-mhc-dark border-mhc-dark rounded-lg hover:bg-mhc-background text-mhc-background
+    hover:text-mhc-dark border-2
+  }
+
+  .btn-red {
+    @apply bg-mhc-red border-mhc-red rounded-lg hover:bg-mhc-red-hover text-mhc-background
+    border-2
+  }
+
+  .btn-orange {
+    @apply bg-mhc-orange border-mhc-orange rounded-lg hover:bg-mhc-orange-hover text-mhc-background
+    border-2
   }
 }

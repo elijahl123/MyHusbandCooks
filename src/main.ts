@@ -9,4 +9,12 @@ if (environment.production) {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
+  .then(() => {
+    // Hide the splash screen
+    const splash = document.getElementById('splash-screen');
+    if (splash) {
+      splash.classList.add('hide');
+      setTimeout(() => splash.remove(), 1000); // Remove after transition
+    }
+  })
   .catch(err => console.error(err));

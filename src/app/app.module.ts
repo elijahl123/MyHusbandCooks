@@ -19,8 +19,11 @@ import { AccountComponent } from './code/components/account/account.component';
 import { AuthGuard } from './code/guards/auth-guard.guard';
 import { PostListComponent } from './code/components/post-list/post-list.component';
 import { QuillConfigModule, QuillEditorComponent } from 'ngx-quill';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { CommentComponent } from './code/components/comment/comment.component';
+import { StripTagsPipe } from './code/pipes/strip-tags.pipe';
+import { TruncatePipe } from './code/pipes/truncate.pipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export const app = firebase.initializeApp(environment.firebase);
 export const analytics = getAnalytics(app);
@@ -38,7 +41,9 @@ export const db = getFirestore(app)
     RegisterComponent,
     AccountComponent,
     PostListComponent,
-    CommentComponent
+    CommentComponent,
+    StripTagsPipe,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,
@@ -56,10 +61,13 @@ export const db = getFirestore(app)
           [{ color: [] }, { background: [] }],
           ['link'],
           ['clean'],
+          ['image', 'video']
         ]
       }
     }),
     QuillEditorComponent,
+    FontAwesomeModule,
+    NgOptimizedImage,
   ],
   providers: [
     AuthGuard

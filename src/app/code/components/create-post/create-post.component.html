@@ -1,11 +1,27 @@
-<h1>{{ postId ? 'Edit Post' : 'Create Post' }}</h1>
-<form [formGroup]="postForm">
-  <label for="title">Title:</label>
-  <input type="text" id="title" formControlName="title" required>
-
-  <!-- Rich text editor for content (you can use a package like ngx-quill) -->
-  <label for="content">Content:</label>
-  <quill-editor formControlName="content" id="content"></quill-editor>
-
-  <button (click)="savePost()">{{ postId ? 'Update' : 'Create' }}</button>
-</form>
+<div class="w-full h-full overflow-auto justify-center items-center p-20 bg-mhc-background flex-col gap-7 inline-flex">
+  <form [formGroup]="postForm" class="create-post-form p-8 bg-mhc-dark rounded-2xl flex-col gap-7 flex max-w-screen-lg w-full overflow-auto">
+    <div class="flex-col gap-4 flex">
+      <div class="text-center text-white text-5xl font-bold font-serif">{{ postId ? 'Edit Post' : 'Create Post' }}</div>
+    </div>
+    <div class="w-full flex-col justify-center items-start gap-3 inline-flex">
+      <div class="text-center text-mhc-background text-base font-semibold">Title</div>
+      <input
+        class="w-full btn btn-lg bg-mhc-background flex-col justify-center items-start gap-2.5 flex text-mhc-dark text-base font-semibold cursor-text outline-0"
+        formControlName="title" id="title" required type="text">
+    </div>
+    <div class="w-full flex-col justify-center items-start gap-3 inline-flex">
+      <div class="text-center text-mhc-background text-base font-semibold">Cover Image</div>
+      <input
+        class="w-full btn btn-lg bg-mhc-background flex-col justify-center items-start gap-2.5 flex text-mhc-dark text-base font-semibold cursor-text outline-0"
+        formControlName="coverImage" id="coverImage" placeholder="Cover Image" required type="file" #fileInput (change)="handleFileInput($event)">
+    </div>
+    <div class="w-full flex-col justify-center items-start gap-3 inline-flex">
+      <div class="text-center text-mhc-background text-base font-semibold">Content</div>
+      <quill-editor class="bg-mhc-background h-full rounded-xl border-none w-full" formControlName="content"
+                    id="content"></quill-editor>
+    </div>
+    <button (click)="savePost()" class="btn btn-lg btn-red flex-col gap-2.5 flex items-center" type="button">
+      <span class="text-mhc-background text-base font-semibold">{{ postId ? 'Update' : 'Create' }}</span>
+    </button>
+  </form>
+</div>

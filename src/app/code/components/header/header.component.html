@@ -9,13 +9,13 @@
     <a *ngIf="!isLoggedIn" routerLink="/login" class="btn btn-background">
       <div class="text-center text-lg font-semibold">Login</div>
     </a>
-    <a *ngIf="!isLoggedIn" routerLink="/register" class="btn btn-dark">
+    <a *ngIf="!isLoggedIn" routerLink="/register" class="btn btn-dark bg-transparent">
       <div class="text-center text-lg font-semibold">Register</div>
     </a>
     <a *ngIf="isLoggedIn" routerLink="/account" class="btn btn-background">
       <div class="text-center text-lg font-semibold">Account</div>
     </a>
-    <button *ngIf="isLoggedIn" (click)="logout()" class="btn btn-dark">
+    <button *ngIf="isLoggedIn" (click)="logout()" class="btn btn-dark bg-transparent">
       <span class="text-center text-lg font-semibold">Logout</span>
     </button>
   </div>

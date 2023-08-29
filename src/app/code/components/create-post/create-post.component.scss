@@ -1,0 +1,7 @@
+.ql-toolbar, .ql-container {
+  border: none !important;
+}
+
+.create-post-form::-webkit-scrollbar-thumb {
+  @apply bg-mhc-red rounded-xl;
+}

@@ -1,10 +1,17 @@
-<div *ngFor="let post of posts">
-  <h2>{{ post.title }}</h2>
-  <div [innerHTML]="post.content"></div> <!-- Display rich text content -->
-  <p>Author ID: {{ post.authorId }}</p>
-  <a [routerLink]="['/post', post.id]">Read More</a>
-  <!-- Add options to filter, sort, or search posts -->
-</div>
-<div class="w-full h-full px-20 py-10 justify-center flex-col items-start gap-12 inline-flex">
-
+<div class="w-full px-20 py-10 justify-center items-center flex-col gap-12 inline-flex">
+  <a *ngFor="let post of posts"
+     [routerLink]="['/post', post.id]"
+     class="max-w-screen-lg w-full p-8 bg-mhc-red hover:bg-mhc-red-hover transition-all duration-200 rounded-2xl gap-8 inline-flex
+            text-mhc-background">
+    <div *ngIf="post.coverImageUrl" class="aspect-square h-48 bg-mhc-red-hover rounded-xl flex-col justify-center items-start gap-2.5 inline-flex relative">
+      <img class="p-5 relative object-contain" [ngSrc]="post.coverImageUrl" fill="" alt="Cover Image"/>
+    </div>
+    <div class="flex-col gap-4 inline-flex">
+      <div class="flex-col gap-2 flex">
+        <div class="text-3xl font-bold font-serif">{{ post.title }}</div>
+        <div class="text-base font-medium">{{ post.timestamp.toDate() | date:'mediumDate' }}</div>
+      </div>
+      <div class="text-lg font-medium">{{ post.content | stripTags | truncate:50  }}</div>
+    </div>
+  </a>
 </div>

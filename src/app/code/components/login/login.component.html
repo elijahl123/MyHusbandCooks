@@ -1,10 +1,20 @@
-<h1>Login</h1>
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-  <label for="email">Email:</label>
-  <input type="email" id="email" formControlName="email" required>
-
-  <label for="password">Password:</label>
-  <input type="password" id="password" formControlName="password" required>
-
-  <button type="submit">Login</button>
+<form (ngSubmit)="login()" [formGroup]="loginForm"
+      class="w-full h-full justify-center items-center p-20 bg-mhc-background flex-col gap-7 inline-flex">
+  <div class="p-8 bg-mhc-dark rounded-2xl flex-col gap-7 flex max-w-screen-sm w-full">
+    <div class="flex-col gap-4 flex">
+      <div class="text-center text-white text-5xl font-bold font-serif">Login</div>
+      <div class="text-center">
+        <span class="text-mhc-background text-base font-bold">New here? Try registering </span>
+        <a routerLink="/register" class="text-mhc-background-hover text-base font-bold">here</a></div>
+    </div>
+    <input
+      class="btn btn-lg bg-mhc-background flex-col justify-center items-start gap-2.5 flex text-mhc-dark text-base font-semibold cursor-text outline-0"
+      formControlName="email" id="email" placeholder="Email" required type="email">
+    <input
+      class="btn btn-lg bg-mhc-background flex-col justify-center items-start gap-2.5 flex text-mhc-dark text-base font-semibold cursor-text outline-0"
+      formControlName="password" id="password" placeholder="Password" required type="password">
+    <button type="submit" class="btn btn-lg btn-red flex-col gap-2.5 flex items-center">
+      <span class="text-mhc-background text-base font-semibold">Submit</span>
+    </button>
+  </div>
 </form>

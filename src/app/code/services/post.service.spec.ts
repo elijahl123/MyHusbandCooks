@@ -19,7 +19,8 @@ describe('PostService', () => {
     const post = {
       title: 'Test Title',
       content: 'Test Content',
-      authorId: 'Test Author ID'
+      authorId: 'Test Author ID',
+      timestamp: Timestamp.fromDate(new Date())
     };
     const postId = await service.createPost(post);
     expect(postId).toBeDefined();
@@ -52,7 +53,8 @@ describe('PostService', () => {
       id: postId, // Replace with a valid post ID
       title: 'Updated Title',
       content: 'Updated Content',
-      authorId: 'Updated Author ID'
+      authorId: 'Updated Author ID',
+      timestamp: Timestamp.fromDate(new Date())
     };
     await service.updatePost(post);
     // Additional assertions based on your Firestore setup

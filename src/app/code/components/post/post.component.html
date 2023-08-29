@@ -1,7 +1,45 @@
-<div *ngIf="post">
-  <h1>{{ post.title }}</h1>
-  <div [innerHTML]="post.content"></div> <!-- Display rich text content -->
-  <p>Author ID: {{ post.authorId }}</p>
-  <!-- Add options to edit or delete post for authenticated users or superusers -->
-  <app-comment [postId]="post.id!"></app-comment>
+<div *ngIf="post" class="flex justify-center p-10">
+  <div class="max-w-screen-lg w-full min-h-full gap-12 inline-flex items-start relative">
+    <div class="flex flex-col gap-12 fixed z-50">
+      <button (click)="back()" class="btn btn-lg btn-red aspect-square flex justify-center items-center" title="Back">
+        <fa-icon [icon]="chevronLeft"></fa-icon>
+      </button>
+      <a [routerLink]="['/edit', post.id]" *ngIf="isSuperUser"
+              class="btn btn-lg btn-orange aspect-square flex justify-center items-center" title="Edit Post">
+        <fa-icon [icon]="editIcon"></fa-icon>
+      </a>
+      <button (click)="deletePost()" *ngIf="isSuperUser"
+              class="btn btn-lg btn-orange aspect-square flex justify-center items-center" title="Delete Post">
+        <fa-icon [icon]="deleteIcon"></fa-icon>
+      </button>
+    </div>
+    <div class="pl-28 grow shrink basis-0 flex-col gap-12 inline-flex">
+      <div class="flex-col gap-8 flex">
+        <div *ngIf="post.coverImageUrl" class="bg-mhc-red-hover rounded-2xl flex justify-center relative h-72">
+          <img [ngSrc]="post.coverImageUrl" alt="Post Image" class="p-6 object-contain" fill=""/>
+        </div>
+        <div class="text-mhc-dark text-5xl font-bold font-serif">{{ post.title }}</div>
+        <div class="justify-between items-start gap-6 inline-flex">
+          <div class="text-mhc-dark text-xl font-bold">{{ authorName }}</div>
+          <div class="text-mhc-dark text-xl font-bold">{{ post.timestamp.toDate()|date:"mediumDate" }}</div>
+        </div>
+        <div [innerHTML]="post.content" class="text-justify text-mhc-dark text-2xl font-semibold"></div>
+      </div>
+      <div class="justify-start items-start gap-6 inline-flex">
+        <div class="btn btn-dark-filled btn-lg gap-2.5 flex opacity-80">
+          <div class="text-center">
+            <span class="font-black mr-3"><fa-icon [icon]="chevronDown"></fa-icon></span>
+            <span class="font-bold">Comments</span>
+          </div>
+        </div>
+        <div class="btn btn-red bg-transparent btn-lg text-mhc-red hover:text-mhc-background gap-2.5 flex">
+          <div class="text-center">
+            <span class="font-black mr-3"><fa-icon [icon]="heart"></fa-icon></span>
+            <span class="font-bold">13 Likes</span>
+          </div>
+        </div>
+      </div>
+      <app-comment [postId]="post.id!"></app-comment>
+    </div>
+  </div>
 </div>

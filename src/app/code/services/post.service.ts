@@ -18,6 +18,7 @@ export class PostService {
     if (user) {
       post.authorId = user.uid; // Set the author ID from the current user
     }
+    post.timestamp = Timestamp.fromDate(new Date());
     const postsRef = collection(db, 'posts');
     const postRef = await addDoc(postsRef, post);
     return postRef.id; // Return the new post's ID
@@ -48,6 +49,10 @@ export class PostService {
   // Comment Methods
 
   async createComment(postId: string, comment: Comment) {
+    const user = getAuth(app).currentUser;
+    if (user) {
+      comment.authorId = user.uid; // Set the author ID from the current user
+    }
     const commentsRef = collection(db, 'posts', postId, 'comments');
     comment.timestamp = Timestamp.fromDate(new Date());
     const commentRef = await addDoc(commentsRef, comment);
