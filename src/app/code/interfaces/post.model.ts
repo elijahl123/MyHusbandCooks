@@ -7,4 +7,5 @@ export interface Post {
   authorId: string; // Reference to the author's User ID
   coverImageUrl?: string;
   timestamp: Timestamp; // Timestamp for sorting comments
+  likes?: string[];
 }

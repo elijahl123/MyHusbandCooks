@@ -46,6 +46,35 @@ export class PostService {
     await deleteDoc(postRef);
   }
 
+  async likePost(postId: string, userId: string) {
+    const postRef = doc(db, 'posts', postId);
+    const postDoc = await getDoc(postRef);
+    if (postDoc.exists()) {
+      const postData = postDoc.data() as Post;
+      if (!postData.likes) {
+        postData.likes = [];
+      }
+      if (!postData.likes.includes(userId)) {
+        postData.likes.push(userId);
+      }
+      await updateDoc(postRef, { likes: postData.likes });
+    }
+  }
+
+  async unlikePost(postId: string, userId: string) {
+    const postRef = doc(db, 'posts', postId);
+    const postDoc = await getDoc(postRef);
+    if (postDoc.exists()) {
+      const postData = postDoc.data() as Post;
+      if (postData.likes && postData.likes.includes(userId)) {
+        const index = postData.likes.indexOf(userId);
+        postData.likes.splice(index, 1);
+      }
+      await updateDoc(postRef, { likes: postData.likes });
+    }
+  }
+
+
   // Comment Methods
 
   async createComment(postId: string, comment: Comment) {

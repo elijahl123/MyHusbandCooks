@@ -33,9 +33,9 @@
           </div>
         </div>
         <div class="btn btn-red bg-transparent btn-lg text-mhc-red hover:text-mhc-background gap-2.5 flex">
-          <div class="text-center">
+          <div class="text-center" (click)="likePost()">
             <span class="font-black mr-3"><fa-icon [icon]="heart"></fa-icon></span>
-            <span class="font-bold">13 Likes</span>
+            <span class="font-bold">{{ post.likes?.length || '0' }} Likes</span>
           </div>
         </div>
       </div>
