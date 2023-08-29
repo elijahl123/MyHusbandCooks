@@ -6,7 +6,7 @@ import { faChevronDown, faChevronLeft, faEdit, faHeart, faTrash } from '@fortawe
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { AuthService } from '../../services/auth.service';
 import { Location } from '@angular/common';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { app } from '../../../app.module';
 
 @Component({
@@ -40,11 +40,14 @@ export class PostComponent implements OnInit {
           if (user) {
             const userData = await this.authService.getUser();
             this.isSuperUser = userData?.superuser || false;
-            this.likedPost = post?.likes?.includes(user.id) || false;
           } else {
             this.isSuperUser = false;
           }
         });
+        const user = getAuth(app).currentUser;
+        if (user) {
+          this.likedPost = post?.likes?.includes(user.uid) || false;
+        }
       });
     }
   }
@@ -68,10 +71,12 @@ export class PostComponent implements OnInit {
   }
 
   async likePost() {
-    const user = await this.authService.getUser();
+    const user = getAuth(app).currentUser;
     if (user && this.post) {
-      await this.postService.likePost(this.post.id!, user.id);
+      await this.postService.likePost(this.post.id!, user.uid);
       // Refresh the post or update the UI as needed
+      this.likedPost = true;
+      this.ngOnInit();
     } else {
       // Redirect to log in
       await this.router.navigate(['/login']);
@@ -79,10 +84,12 @@ export class PostComponent implements OnInit {
   }
 
   async unlikePost() {
-    const user = await this.authService.getUser();
+    const user = getAuth(app).currentUser;
     if (user && this.post) {
-      await this.postService.unlikePost(this.post.id!, user.id);
+      await this.postService.unlikePost(this.post.id!, user.uid);
       // Refresh the post or update the UI as needed
+      this.likedPost = false;
+      this.ngOnInit();
     } else {
       // Redirect to log in
       await this.router.navigate(['/login']);

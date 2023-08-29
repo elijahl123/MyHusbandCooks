@@ -4,8 +4,8 @@
       <button (click)="back()" class="btn btn-lg btn-red aspect-square flex justify-center items-center" title="Back">
         <fa-icon [icon]="chevronLeft"></fa-icon>
       </button>
-      <a [routerLink]="['/edit', post.id]" *ngIf="isSuperUser"
-              class="btn btn-lg btn-orange aspect-square flex justify-center items-center" title="Edit Post">
+      <a *ngIf="isSuperUser" [routerLink]="['/edit', post.id]"
+         class="btn btn-lg btn-orange aspect-square flex justify-center items-center" title="Edit Post">
         <fa-icon [icon]="editIcon"></fa-icon>
       </a>
       <button (click)="deletePost()" *ngIf="isSuperUser"
@@ -32,8 +32,10 @@
             <span class="font-bold">Comments</span>
           </div>
         </div>
-        <div class="btn btn-red bg-transparent btn-lg text-mhc-red hover:text-mhc-background gap-2.5 flex">
-          <div class="text-center" (click)="likePost()">
+        <div (click)="likedPost ? unlikePost() : likePost()"
+             class="btn btn-red btn-lg gap-2.5 flex"
+            [ngClass]="likedPost ? 'bg-mhc-red-hover text-mhc-background hover:bg-mhc-red' : 'bg-transparent hover:text-mhc-background text-mhc-red'">
+          <div class="text-center">
             <span class="font-black mr-3"><fa-icon [icon]="heart"></fa-icon></span>
             <span class="font-bold">{{ post.likes?.length || '0' }} Likes</span>
           </div>
