@@ -16,7 +16,9 @@ const routes: Routes = [
   { path: 'edit/:id', component: CreatePostComponent, canActivate: [SuperuserGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'account', component: AccountComponent, canActivate: [AuthGuard] }
+  { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
+  // Wildcard route for a home page
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

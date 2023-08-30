@@ -11,12 +11,11 @@ import { LoginComponent } from './code/components/login/login.component';
 import { RegisterComponent } from './code/components/register/register.component';
 import { environment } from '../environments/environment';
 import { getAnalytics } from 'firebase/analytics';
-import { getAuth } from "firebase/auth";
+import { getAuth } from 'firebase/auth';
 import * as firebase from 'firebase/app';
 import { ReactiveFormsModule } from '@angular/forms';
 import { getFirestore } from 'firebase/firestore';
 import { AccountComponent } from './code/components/account/account.component';
-import { AuthGuard } from './code/guards/auth-guard.guard';
 import { PostListComponent } from './code/components/post-list/post-list.component';
 import { QuillConfigModule, QuillEditorComponent } from 'ngx-quill';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
@@ -24,7 +23,7 @@ import { CommentComponent } from './code/components/comment/comment.component';
 import { StripTagsPipe } from './code/pipes/strip-tags.pipe';
 import { TruncatePipe } from './code/pipes/truncate.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { PaymentComponent } from './code/components/payment/payment.component';
+import { FooterComponent } from './code/components/footer/footer.component';
 
 export const app = firebase.initializeApp(environment.firebase);
 export const analytics = getAnalytics(app);
@@ -45,7 +44,7 @@ export const db = getFirestore(app)
     CommentComponent,
     StripTagsPipe,
     TruncatePipe,
-    PaymentComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,9 +70,7 @@ export const db = getFirestore(app)
     FontAwesomeModule,
     NgOptimizedImage,
   ],
-  providers: [
-    AuthGuard
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

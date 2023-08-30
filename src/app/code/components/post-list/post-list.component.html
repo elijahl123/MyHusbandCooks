@@ -3,7 +3,7 @@
      [routerLink]="['/post', post.id]"
      class="max-w-screen-lg w-full p-8 bg-mhc-red hover:bg-mhc-red-hover transition-all duration-200 rounded-2xl gap-8 inline-flex
             text-mhc-background">
-    <div *ngIf="post.coverImageUrl" class="aspect-square h-48 bg-mhc-red-hover rounded-xl flex-col justify-center items-start gap-2.5 inline-flex relative">
+    <div *ngIf="post.coverImageUrl" class="aspect-square h-48 bg-mhc-red-hover rounded-xl flex-col justify-center items-start gap-2.5 inline-flex" style="position: relative">
       <img class="p-5 relative object-contain" [ngSrc]="post.coverImageUrl" fill="" alt="Cover Image"/>
     </div>
     <div class="flex-col gap-4 inline-flex">
