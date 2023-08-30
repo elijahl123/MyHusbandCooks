@@ -40,7 +40,7 @@
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
     "autoprefixer": "^10.4.15",
-    "firebase-tools": "^12.4.8",
+    "firebase-tools": "^12.5.2",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
