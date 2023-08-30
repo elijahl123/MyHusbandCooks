@@ -24,6 +24,7 @@ import { CommentComponent } from './code/components/comment/comment.component';
 import { StripTagsPipe } from './code/pipes/strip-tags.pipe';
 import { TruncatePipe } from './code/pipes/truncate.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PaymentComponent } from './code/components/payment/payment.component';
 
 export const app = firebase.initializeApp(environment.firebase);
 export const analytics = getAnalytics(app);
@@ -43,7 +44,8 @@ export const db = getFirestore(app)
     PostListComponent,
     CommentComponent,
     StripTagsPipe,
-    TruncatePipe
+    TruncatePipe,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,
