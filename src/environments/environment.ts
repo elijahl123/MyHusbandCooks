@@ -12,6 +12,10 @@ export const environment = {
     messagingSenderId: '895944752629',
     measurementId: 'G-HS49HHGPF7',
   },
+  stripe: {
+    publicKey: 'pk_live_51NkZY9Audd3spP87mQuQSpw1Zh77Kbt99XmuWCvJ8X5kg5JrHRdq1jrxD1XvaDC1cSxexrsiI7hINI8jNzvzHvu400laaF6prJ',
+    secretKey: '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',
+  },
   production: false,
 };
 
