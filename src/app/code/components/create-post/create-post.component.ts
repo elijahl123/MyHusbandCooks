@@ -38,9 +38,9 @@ export class CreatePostComponent implements OnInit {
     if (this.postId) {
       this.postService.getPost(this.postId).then(post => {
         if (post) {
-          this.postForm.setValue({
+          this.postForm.patchValue({
             title: post.title,
-            content: post.content,
+            content: post.content
           });
         }
       });
@@ -61,20 +61,16 @@ export class CreatePostComponent implements OnInit {
 
       await new Promise<void>((resolve, reject) => {
         task.on('state_changed',
-          (snapshot) => {
-            // Handle progress
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is ' + progress + '% done');
-          },
+          () => {},
           (error) => {
             // Handle unsuccessful uploads
-            console.log('Upload error:', error);
+            console.error('Upload error:', error);
             reject();
           },
           async () => {
             // Handle successful uploads on complete
             const downloadURL = await getDownloadURL(fileRef);
-            console.log('File available at', downloadURL);
+            console.info('File available at', downloadURL);
             // Save the download URL to your Post model
             post.coverImageUrl = downloadURL;
             resolve();
