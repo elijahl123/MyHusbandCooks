@@ -11,7 +11,7 @@
         <div class="text-3xl font-bold font-serif">{{ post.title }}</div>
         <div class="text-base font-medium">{{ post.timestamp.toDate() | date:'mediumDate' }}</div>
       </div>
-      <div class="text-lg font-medium">{{ post.content | stripTags | truncate:50  }}</div>
+      <div class="text-lg font-medium">{{ post.content | stripTags | removeHtmlEntries | truncate:50  }}</div>
     </div>
   </a>
 </div>

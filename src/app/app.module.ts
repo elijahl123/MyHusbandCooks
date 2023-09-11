@@ -24,6 +24,7 @@ import { StripTagsPipe } from './code/pipes/strip-tags.pipe';
 import { TruncatePipe } from './code/pipes/truncate.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './code/components/footer/footer.component';
+import { RemoveHtmlEntriesPipe } from './code/pipes/remove-html-entries.pipe';
 
 export const app = firebase.initializeApp(environment.firebase);
 export const analytics = getAnalytics(app);
@@ -45,6 +46,7 @@ export const db = getFirestore(app)
     StripTagsPipe,
     TruncatePipe,
     FooterComponent,
+    RemoveHtmlEntriesPipe,
   ],
   imports: [
     BrowserModule,
