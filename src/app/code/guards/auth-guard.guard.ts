@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../app.module';
-import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,7 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router) {
+  }
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     return new Promise(resolve => {

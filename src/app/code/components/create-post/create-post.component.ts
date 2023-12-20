@@ -61,7 +61,8 @@ export class CreatePostComponent implements OnInit {
 
       await new Promise<void>((resolve, reject) => {
         task.on('state_changed',
-          () => {},
+          () => {
+          },
           (error) => {
             // Handle unsuccessful uploads
             console.error('Upload error:', error);
@@ -85,7 +86,7 @@ export class CreatePostComponent implements OnInit {
     } else {
       await this.postService.createPost(post);
     }
-    this.router.navigate(['/']).then( () => {
+    this.router.navigate(['/']).then(() => {
       // Alert the user that the post was saved
       alert('Post saved successfully!');
     });
