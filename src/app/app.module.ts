@@ -25,6 +25,7 @@ import { TruncatePipe } from './code/pipes/truncate.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './code/components/footer/footer.component';
 import { RemoveHtmlEntriesPipe } from './code/pipes/remove-html-entries.pipe';
+import { PasswordResetComponent } from './code/components/password-reset/password-reset.component';
 
 export const app = firebase.initializeApp(environment.firebase);
 export const analytics = getAnalytics(app);
@@ -47,6 +48,7 @@ export const db = getFirestore(app)
     TruncatePipe,
     FooterComponent,
     RemoveHtmlEntriesPipe,
+    PasswordResetComponent,
   ],
   imports: [
     BrowserModule,

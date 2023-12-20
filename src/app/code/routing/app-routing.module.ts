@@ -8,6 +8,7 @@ import { LoginComponent } from '../components/login/login.component';
 import { AuthGuard } from '../guards/auth-guard.guard';
 import { AccountComponent } from '../components/account/account.component';
 import { SuperuserGuard } from '../guards/superuser-guard.guard';
+import { PasswordResetComponent } from '../components/password-reset/password-reset.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'edit/:id', component: CreatePostComponent, canActivate: [SuperuserGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'reset-password', component: PasswordResetComponent },
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
   // Wildcard route for a home page
   { path: '**', redirectTo: '' }
