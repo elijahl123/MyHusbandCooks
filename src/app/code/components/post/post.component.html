@@ -1,39 +1,39 @@
-<div *ngIf="post" class="flex justify-center p-10">
-  <div class="max-w-screen-lg w-full min-h-full gap-12 inline-flex items-start relative">
-    <div class="flex flex-col gap-12 fixed z-50">
-      <button (click)="back()" class="btn btn-lg btn-red aspect-square flex justify-center items-center" title="Back">
+<div *ngIf="post" class="flex justify-center p-10 md:h-full">
+  <div class="max-w-screen-lg w-full min-h-full gap-12 flex flex-col items-center relative justify-center md:flex-col md:items-start">
+    <div class="flex flex-row justify-center gap-12 md:fixed z-50 md:flex-col">
+      <button (click)="back()" class="btn md:btn-lg btn-red aspect-square flex justify-center items-center" title="Back">
         <fa-icon [icon]="chevronLeft"></fa-icon>
       </button>
       <a *ngIf="isSuperUser" [routerLink]="['/edit', post.id]"
-         class="btn btn-lg btn-orange aspect-square flex justify-center items-center" title="Edit Post">
+         class="btn md:btn-lg btn-orange aspect-square flex justify-center items-center" title="Edit Post">
         <fa-icon [icon]="editIcon"></fa-icon>
       </a>
       <button (click)="deletePost()" *ngIf="isSuperUser"
-              class="btn btn-lg btn-orange aspect-square flex justify-center items-center" title="Delete Post">
+              class="btn md:btn-lg btn-orange aspect-square flex justify-center items-center" title="Delete Post">
         <fa-icon [icon]="deleteIcon"></fa-icon>
       </button>
     </div>
-    <div class="pl-28 grow shrink basis-0 flex-col gap-12 inline-flex">
+    <div class="grow shrink basis-0 flex-col gap-12 inline-flex md:pl-28">
       <div class="flex-col gap-8 flex">
         <div *ngIf="post.coverImageUrl" class="bg-mhc-red-hover rounded-2xl flex justify-center relative h-72">
           <img [ngSrc]="post.coverImageUrl" alt="Post Image" class="p-6 object-contain" fill=""/>
         </div>
-        <div class="text-mhc-dark text-5xl font-bold font-serif">{{ post.title }}</div>
+        <div class="text-mhc-dark text-4xl font-bold font-serif md:text-5xl">{{ post.title }}</div>
         <div class="justify-between items-start gap-6 inline-flex">
-          <div class="text-mhc-dark text-xl font-bold">{{ authorName }}</div>
-          <div class="text-mhc-dark text-xl font-bold">{{ post.timestamp.toDate()|date:"mediumDate" }}</div>
+          <div class="text-mhc-dark text-base font-bold md:text-xl">{{ authorName }}</div>
+          <div class="text-mhc-dark text-base font-bold md:text-xl">{{ post.timestamp.toDate()|date:"mediumDate" }}</div>
         </div>
-        <div [innerHTML]="post.content" class="text-justify text-mhc-dark text-2xl font-semibold"></div>
+        <div [innerHTML]="post.content" class="text-justify text-mhc-dark text-xl font-semibold md:text-xl"></div>
       </div>
-      <div class="justify-start items-start gap-6 inline-flex">
-        <div class="btn btn-dark-filled btn-lg gap-2.5 flex opacity-80">
+      <div class="justify-center items-center gap-6 inline-flex md:justify-start md:items-start">
+        <div class="btn btn-dark-filled md:btn-lg gap-2.5 flex opacity-80">
           <div class="text-center">
             <span class="font-black mr-3"><fa-icon [icon]="chevronDown"></fa-icon></span>
             <span class="font-bold">Comments</span>
           </div>
         </div>
         <div (click)="likedPost ? unlikePost() : likePost()"
-             class="btn btn-red btn-lg gap-2.5 flex"
+             class="btn btn-red md:btn-lg gap-2.5 flex"
             [ngClass]="likedPost ? 'bg-mhc-red-hover text-mhc-background hover:bg-mhc-red' : 'bg-transparent hover:text-mhc-background text-mhc-red'">
           <div class="text-center">
             <span class="font-black mr-3"><fa-icon [icon]="heart"></fa-icon></span>
@@ -46,5 +46,5 @@
   </div>
 </div>
 <div class="w-full p-8 bg-mhc-dark justify-center items-center gap-2.5 inline-flex">
-  <div class="text-white text-xl font-normal">My Husband Cooks © 2023 by Elijah Lopez</div>
+  <div class="text-white text-xl font-normal text-center">My Husband Cooks © 2024 by Elijah Lopez</div>
 </div>

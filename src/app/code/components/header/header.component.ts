@@ -3,6 +3,8 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { app } from '../../../app.module';
+import { faBars, faEdit } from '@fortawesome/pro-solid-svg-icons';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +12,12 @@ import { app } from '../../../app.module';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  menuIcon: IconDefinition = faBars;
   isLoggedIn = false;
+
   isSuperuser = false;
+  isMenuOpen = false;
+  protected readonly editIcon = faEdit;
 
   constructor(private authService: AuthService, private router: Router) {
     const auth = getAuth(app);
@@ -29,5 +35,9 @@ export class HeaderComponent {
   logout() {
     this.authService.signOut();
     this.router.navigate(['/login']);
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 }
