@@ -21,8 +21,14 @@ export const sendEmailOnPostCreation = functions.firestore
     const post = snap.data();
     const postId = context.params.postId;
 
-    const usersSnapshot = await admin.firestore()
-      .collection("users").where("superuser", "==", true).get();
+    // Fetch author details
+    const authorDoc = await admin.firestore().collection("users")
+      .doc(post.authorId).get();
+    const author = authorDoc.data()!;
+    const authorName = `${author.firstName} ${author.lastName}`;
+
+    // Fetch all users
+    const usersSnapshot = await admin.firestore().collection("users").get();
     const recipientEmails: string[] = [];
     usersSnapshot.forEach((userDoc) => {
       const user = userDoc.data();
@@ -34,10 +40,12 @@ export const sendEmailOnPostCreation = functions.firestore
       bcc: recipientEmails,
       subject: `New Post Created: ${post.title}`,
       html: `
-        <p>A new post has been created by ${post.authorId}:</p>
-        <p>Title: ${post.title}</p>
-        <p>Content: ${post.content}</p>
+        <p>Hi there,</p>
+        <p>A new post has been created by ${authorName}:</p>
+        <p><strong>Title:</strong> ${post.title}</p>
+        <p><strong>Content:</strong> ${post.content}</p>
         <p><a href="https://myhusbandcooks.us/post/${postId}">View Post</a></p>
+        <p>Best regards,<br/>My Husband Cooks</p>
       `,
     };
 
