@@ -10,11 +10,6 @@ import { PostComponent } from './code/components/post/post.component';
 import { LoginComponent } from './code/components/login/login.component';
 import { RegisterComponent } from './code/components/register/register.component';
 import { environment } from '../environments/environment';
-import { getAnalytics } from 'firebase/analytics';
-import { getAuth } from 'firebase/auth';
-import * as firebase from 'firebase/app';
-import { ReactiveFormsModule } from '@angular/forms';
-import { getFirestore } from 'firebase/firestore';
 import { AccountComponent } from './code/components/account/account.component';
 import { PostListComponent } from './code/components/post-list/post-list.component';
 import { QuillConfigModule, QuillEditorComponent } from 'ngx-quill';
@@ -26,11 +21,24 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './code/components/footer/footer.component';
 import { RemoveHtmlEntriesPipe } from './code/pipes/remove-html-entries.pipe';
 import { PasswordResetComponent } from './code/components/password-reset/password-reset.component';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics, isSupported } from 'firebase/analytics';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { ReactiveFormsModule } from '@angular/forms';
 
-export const app = firebase.initializeApp(environment.firebase);
-export const analytics = getAnalytics(app);
+export const app = initializeApp(environment.firebase);
+
+let analyticsService;
+isSupported().then(supported => {
+  if (supported) {
+    analyticsService = getAnalytics(app);
+  }
+});
+export const analytics = analyticsService;
+
 export const auth = getAuth(app);
-export const db = getFirestore(app)
+export const db = getFirestore(app);
 
 @NgModule({
   declarations: [
