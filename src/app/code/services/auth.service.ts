@@ -24,7 +24,8 @@ export class AuthService {
         firstName,
         lastName,
         email,
-        superuser: false // Default to false
+        superuser: false, // Default to false
+        emailOptIn: true  // Opt in to emails by default
       });
       // Redirect to home or other page
     } catch (error: any) {

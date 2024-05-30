@@ -32,7 +32,9 @@ export const sendEmailOnPostCreation = functions.firestore
     const recipientEmails: string[] = [];
     usersSnapshot.forEach((userDoc) => {
       const user = userDoc.data();
-      recipientEmails.push(user.email);
+      if (user.emailOptIn) {
+        recipientEmails.push(user.email);
+      }
     });
 
     const mailOptions = {
@@ -45,6 +47,7 @@ export const sendEmailOnPostCreation = functions.firestore
         <p><strong>Title:</strong> ${post.title}</p>
         <p><strong>Content:</strong> ${post.content}</p>
         <p><a href="https://myhusbandcooks.us/post/${postId}">View Post</a></p>
+        <p><a href="https://myhusbandcooks.us/account">Update Email Preferences</a></p>
         <p>Best regards,<br/>My Husband Cooks</p>
       `,
     };

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { onAuthStateChanged } from 'firebase/auth';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { auth, db } from '../../../app.module';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import {Component} from '@angular/core';
+import {onAuthStateChanged} from 'firebase/auth';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {auth, db} from '../../../app.module';
+import {doc, getDoc, setDoc, updateDoc} from 'firebase/firestore';
 
 @Component({
   selector: 'app-account',
@@ -18,12 +18,13 @@ export class AccountComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      superuser: [false]
+      superuser: [false],
+      emailOptIn: [true]
     });
     onAuthStateChanged(auth, user => {
       if (user) {
         this.userId = user.uid;
-        this.loadUserData();
+        this.loadUserData().then();
       }
     });
   }
@@ -32,7 +33,13 @@ export class AccountComponent {
     const userRef = doc(db, 'users', this.userId);
     const userDoc = await getDoc(userRef);
     if (userDoc.exists()) {
-      this.accountForm.setValue(userDoc.data());
+      let userData = userDoc.data();
+      if (!('emailOptIn' in userData)) {
+        // If emailOptIn field does not exist, add it and set it to true
+        userData.emailOptIn = true;
+        await updateDoc(userRef, { emailOptIn: true });
+      }
+      this.accountForm.setValue(userData);
     }
   }
 

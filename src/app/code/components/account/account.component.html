@@ -4,7 +4,8 @@
     <div class="flex-col gap-4 flex">
       <div class="text-center text-white text-5xl font-bold font-serif">Account</div>
       <div class="text-center">
-        <span class="text-mhc-background text-base font-bold">Here you can view and edit your account information!</span>
+        <span
+          class="text-mhc-background text-base font-bold">Here you can view and edit your account information!</span>
       </div>
     </div>
     <input
@@ -16,6 +17,12 @@
     <input
       class="btn btn-lg bg-mhc-background flex-col justify-center items-start gap-2.5 flex text-mhc-dark text-base font-semibold cursor-text outline-0"
       formControlName="email" id="email" placeholder="Email" required type="email">
+    <label class="flex flex-row justify-center items-center">
+      <input
+        type="checkbox"
+        formControlName="emailOptIn" id="emailOptIn">
+      <span class="text-mhc-background text-base font-semibold pl-3">I would like to receive email updates</span>
+    </label>
     <button type="button" (click)="saveChanges()" class="btn btn-lg btn-red flex-col gap-2.5 flex items-center">
       <span class="text-mhc-background text-base font-semibold">Save Changes</span>
     </button>
